@@ -31,13 +31,13 @@ const PopupComponent = ({ onClose, updateClassDetails, classData }) => {
     <div className="popup">
       <div className="popup-content">
         <div className="popup-header">
-          <h2>Update Class Details</h2>
+          <h2>Update Room Details</h2>
           <button className="close-button" onClick={onClose}>
             X
           </button>
         </div>
         <div className="popup-body">
-          <label htmlFor="classTitle">Class Title:</label>
+          <label htmlFor="classTitle">Room Title:</label>
           <input
             type="text"
             id="classTitle"
@@ -45,7 +45,7 @@ const PopupComponent = ({ onClose, updateClassDetails, classData }) => {
             onChange={(e) => setClassTitle(e.target.value)}
           />
 
-          <label htmlFor="classYear">Class Year:</label>
+          <label htmlFor="classYear">Room Year:</label>
           <input
             type="text"
             id="classYear"
@@ -53,7 +53,7 @@ const PopupComponent = ({ onClose, updateClassDetails, classData }) => {
             onChange={(e) => setClassYear(e.target.value)}
           />
 
-          <label htmlFor="classSection">Class Section:</label>
+          <label htmlFor="classSection">Room Section:</label>
           <input
             type="text"
             id="classSection"
@@ -61,7 +61,7 @@ const PopupComponent = ({ onClose, updateClassDetails, classData }) => {
             onChange={(e) => setClassSection(e.target.value)}
           />
 
-          <label htmlFor="classDesc">Class Description:</label>
+          <label htmlFor="classDesc">Room Description:</label>
           <textarea
             id="classDesc"
             value={classDesc}

@@ -1,38 +1,38 @@
-import React,{useState} from 'react';
-import './Popup.css';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./Popup.css";
+import axios from "axios";
 import { UserState } from "../Context/globalContext";
 
-const CreateClassPopup = ({ onClose  }) => {
-  
+const CreateClassPopup = ({ onClose }) => {
   const { user, setUser } = UserState();
-  console.log(user)
-    const [classTitle, setClassTitle] = useState('');
-  const [classYear, setClassYear] = useState('');
-  const [classSection, setClassSection] = useState('');
-  const [classDesc, setClassDesc] = useState('');
-  const [classCode, setClassCode] = useState('');
+  // console.log(user);
+  const [classTitle, setClassTitle] = useState("");
+  const [classDesc, setClassDesc] = useState("");
+  const [classCode, setClassCode] = useState("");
   const handleCreateClass = async () => {
     try {
-        const classData ={
-            classTitle: classTitle,
-            classYear: classYear,
-            classSection: classSection,
-            classDesc: classDesc,
-            classCode: classCode
-        }
-        
-        const config = {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        };
+      const classData = {
+        classTitle: classTitle,
+        classDesc: classDesc,
+        classCode: classCode,
+      };
 
-        console.log(user.token)
-      const response = await axios.post(`${process.env.REACT_APP_PATH_URL}/createclass`, classData, config);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      console.log(user.token);
+      const response = await axios.post(
+        `${process.env.REACT_APP_PATH_URL}/createclass`,
+        classData,
+        config
+      );
       // Handle response if needed
       console.log(response);
       onClose();
+      window.location.reload();
     } catch (error) {
       // Handle error if needed
       console.log(error);
@@ -43,7 +43,7 @@ const CreateClassPopup = ({ onClose  }) => {
     <div className="popup">
       <div className="popup-content">
         <div className="popup-header">
-          <h2>Create Class</h2>
+          <h2>Create Room</h2>
           <button className="close-button" onClick={onClose}>
             X
           </button>
@@ -54,30 +54,14 @@ const CreateClassPopup = ({ onClose  }) => {
             type="text"
             id="classTitle"
             value={classTitle}
-              onChange={(e) => setClassTitle(e.target.value)}
-          />
-
-          <label htmlFor="classYear">Class Year:</label>
-          <input
-            type="text"
-            id="classYear"
-            value={classYear}
-              onChange={(e) => setClassYear(e.target.value)}
-          />
-
-          <label htmlFor="classSection">Class Section:</label>
-          <input
-            type="text"
-            id="classSection"
-            value={classSection}
-              onChange={(e) => setClassSection(e.target.value)}
+            onChange={(e) => setClassTitle(e.target.value)}
           />
 
           <label htmlFor="classDesc">Class Description:</label>
           <textarea
             id="classDesc"
             value={classDesc}
-              onChange={(e) => setClassDesc(e.target.value)}
+            onChange={(e) => setClassDesc(e.target.value)}
           />
 
           <label htmlFor="classCode">Class Code:</label>
@@ -85,7 +69,7 @@ const CreateClassPopup = ({ onClose  }) => {
             type="text"
             id="classCode"
             value={classCode}
-              onChange={(e) => setClassCode(e.target.value)}
+            onChange={(e) => setClassCode(e.target.value)}
           />
         </div>
         <div className="popup-footer">

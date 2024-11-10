@@ -86,7 +86,7 @@ console.log(classData);
       ) : (
         activeLink === 'stream' && <StreamComponent classData={classData} userdata={props.userdata} updateClassDetails={updateClassDetails} />
       )}
-      {activeLink === 'work' && <WorkComponent classData={classData} />}
+      {/* {activeLink === 'work' && <WorkComponent classData={classData} />} */}
       {activeLink === 'people' && <PeopleComponent participantDetails={participantDetails} classData={classData} deleteMember={deleteMember} />}
     </div>
   );

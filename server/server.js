@@ -119,8 +119,6 @@ app.post('/createclass', authenticateToken, async (req, res) => {
       createdByID: req.user._id,
       createdByusername: req.user.username,
       classTitle: req.body.classTitle,
-      classYear: req.body.classYear,
-      classSection: req.body.classSection,
       classDesc: req.body.classDesc,
       classCode: req.body.classCode
     });

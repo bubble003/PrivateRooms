@@ -1,18 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 const globalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(userInfo)
-    setUser(userInfo);
-
-    if (!userInfo) navigate("/");
-  }, [navigate]);
+    if (userInfo) {
+      setUser(userInfo);
+    }
+  }, []);
 
   return (
     <globalContext.Provider

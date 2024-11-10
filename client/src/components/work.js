@@ -11,11 +11,11 @@ const WorkComponent = (props) => {
           <ul>
             <li>
               <h3>New Assignment</h3>
-              <p>This is a new assignment for this class.</p>
+              <p>This is a new assignment for this Room.</p>
             </li>
             <li>
               <h3>Discussion</h3>
-              <p>This is a discussion thread for this class.</p>
+              <p>This is a discussion thread for this Room.</p>
             </li>
           </ul>
         </div>

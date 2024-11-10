@@ -1,14 +1,14 @@
-import React, {useState}from 'react';
-import './Popup.css';
-import axios from 'axios';
-import { UserState } from '../Context/globalContext';
+import React, { useState } from "react";
+import "./Popup.css";
+import axios from "axios";
+import { UserState } from "../Context/globalContext";
 
 const Popup = ({ onClose }) => {
-  const {user,setUser } = UserState();
-  const [classCode, setClassCode] = useState('');
-    const handleClassCodeChange = (e) => {
-        setClassCode(e.target.value);
-    };
+  const { user, setUser } = UserState();
+  const [classCode, setClassCode] = useState("");
+  const handleClassCodeChange = (e) => {
+    setClassCode(e.target.value);
+  };
 
   const handleCancel = () => {
     onClose();
@@ -22,7 +22,6 @@ const Popup = ({ onClose }) => {
         },
       };
 
-
       const response = await axios.patch(
         `${process.env.REACT_APP_PATH_URL}/joinclass`,
         { classCode },
@@ -31,6 +30,7 @@ const Popup = ({ onClose }) => {
       // Handle response if needed
       console.log(response);
       onClose();
+      window.location.reload();
     } catch (error) {
       // Handle error if needed
       console.log(error);
@@ -41,13 +41,13 @@ const Popup = ({ onClose }) => {
     <div className="popup">
       <div className="popup-content">
         <div className="popup-header">
-          <h2>Join Class</h2>
+          <h2>Join Room</h2>
           <button className="close-button" onClick={onClose}>
             X
           </button>
         </div>
         <div className="popup-body">
-          <label htmlFor="classCode">Class Code:</label>
+          <label htmlFor="classCode">Room Code:</label>
           <input
             type="text"
             id="classCode"

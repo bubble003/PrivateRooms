@@ -164,8 +164,8 @@ if (!content && !selectedFile) {
     <div className="class-page-data">
       <div className="class-details-owned">
         <h1>{props.classData.classTitle}</h1>
-        <p><b>Class Description: </b>{props.classData.classDesc}</p>
-        <p><b>Class Code: </b>{props.classData.classCode}</p>
+        <p><b>Room Description: </b>{props.classData.classDesc}</p>
+        <p><b>Room Code: </b>{props.classData.classCode}</p>
         <div className='class-detail-update'>
         <button  onClick={handlePopupToggle}>Edit Info</button>
         </div>

@@ -1,18 +1,18 @@
 // Context/globalContext.js
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import './classdetails.css';
-import CenteredNavbar from '../components/navbar2';
-import StreamComponent from '../components/stream';
-import WorkComponent from '../components/work';
-import PeopleComponent from '../components/people';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useParams, Navigate } from "react-router-dom"; // Import Navigate
+import axios from "axios";
+import "./classdetails.css";
+import CenteredNavbar from "../components/navbar2";
+import StreamComponent from "../components/stream";
+import WorkComponent from "../components/work";
+import PeopleComponent from "../components/people";
 import { UserState } from "../Context/globalContext";
 
 const ClassPage = (props) => {
   const { id } = useParams(); // Get the class ID from the URL params
   const { user } = UserState();
-  const [activeLink, setActiveLink] = useState('stream'); // Active link state
+  const [activeLink, setActiveLink] = useState("stream"); // Active link state
   const [classData, setClassData] = useState(null); // Class data state
   const [participantDetails, setParticipantDetails] = useState([]); // Participant details state
   const [err, setErr] = useState(null); // Error state
@@ -32,22 +32,28 @@ const ClassPage = (props) => {
           },
         };
 
-        const response = await axios.get(`${process.env.REACT_APP_PATH_URL}/class/${id}`, config);
+        const response = await axios.get(
+          `${process.env.REACT_APP_PATH_URL}/class/${id}`,
+          config
+        );
         const data = response.data;
         console.log(data);
 
         setClassData(data.classData);
         setParticipantDetails(data.participants);
       } catch (error) {
-        console.error('Error fetching class data:', error);
-        setErr(error.response?.data.message || 'Failed to fetch class data.');
+        console.error("Error fetching class data:", error);
+        setErr(error.response?.data.message || "Failed to fetch class data.");
       }
     };
 
     fetchClassData();
-  },[]);
+  }, [user, id]); // Add user and id as dependencies
 
-  console.log(user);
+  // Redirect to login if user is not logged in
+  if (!user) {
+    return <Navigate to="/login" />; // Redirect to login page
+  }
 
   return (
     <div className="class-page">
@@ -59,13 +65,9 @@ const ClassPage = (props) => {
       />
       {err ? (
         <p>{err}</p>
-      ) : (
-        (activeLink === "stream" && classData) ? (
-          <StreamComponent classData={classData} userdata={user} />
-          // <></>
-        ) : null
-      )}
-      {activeLink === "work" && classData && <WorkComponent classData={classData} />}
+      ) : activeLink === "stream" && classData ? (
+        <StreamComponent classData={classData} userdata={user} />
+      ) : null}
       {activeLink === "people" && classData && (
         <PeopleComponent
           participantDetails={participantDetails}

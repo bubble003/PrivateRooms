@@ -152,79 +152,98 @@ if (!content && !selectedFile) {
         <p>{props.classData.classDesc}</p>
       </div>
       <div className="feedandassignment">
-        <div className="pending-assignments">
-          <h2>Upcoming</h2>
-          <ul>
-            <li>Assignment1</li>
-            <li>Assignment2</li>
-          </ul>
-        </div>
-        <div className="feed">
-        <div className='new-post'>
-          <h2>Feed</h2>
-             {/* File Upload Popup */}
+        <div className="feed feed-for-owner">
+            <h2>Feed</h2>
+          <div className="new-post">
+            {/* File Upload Popup */}
 
-      {showFileUpload && (
-        <div className="popup">
-      <div className="popup-content">
-        <div className="popup-header">
-         <h2>Upload File</h2>
-          <button className="close-button" onClick={toggleFileUpload}>
-            X
-          </button>
-        </div>
-        <div className="popup-body">
-        <div {...getRootProps()} className="file-upload-container">
-          <label htmlFor="fileInput" className="file-upload-label" style={{
-    border: '2px dashed #007bff',
-    padding: '10px',
-    cursor: 'pointer',
-    borderRadius: '5px',
-  }} >
-            <p>Drag and drop a file here, or click to select a file (e.g., PDF, DOC).</p>
-          </label>
-          <input {...getInputProps()} id="fileInput" style={{ display: 'none' }} />
-            </div>
-        </div>
-        <div className="popup-footer">
-        </div>
-      </div>
-    </div>
-      )}
-          <form onSubmit={handleSubmit}>
-            <textarea
-               value={content}
-               onChange={handleContentChange}
-               onClick={(e) => e.target.style.height = 'auto'}
-               onFocus={(e) => e.target.style.height = 'auto'}
-               onBlur={(e) => e.target.style.height = 'inherit'}
-               placeholder="Enter your post content"
+            {showFileUpload && (
+              <div className="popup">
+                <div className="popup-content">
+                  <div className="popup-header">
+                    <h2>Upload File</h2>
+                    <button className="close-button" onClick={toggleFileUpload}>
+                      X
+                    </button>
+                  </div>
+                  <div className="popup-body">
+                    <div {...getRootProps()} className="file-upload-container">
+                      <label
+                        htmlFor="fileInput"
+                        className="file-upload-label"
+                        style={{
+                          border: "2px dashed #007bff",
+                          padding: "10px",
+                          cursor: "pointer",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        <p>
+                          Drag and drop a file here, or click to select a file
+                          (e.g., PDF, DOC).
+                        </p>
+                      </label>
+                      <input
+                        {...getInputProps()}
+                        id="fileInput"
+                        style={{ display: "none" }}
+                      />
+                    </div>
+                  </div>
+                  <div className="popup-footer"></div>
+                </div>
+              </div>
+            )}
+            <form onSubmit={handleSubmit}>
+              <textarea
+                value={content}
+                onChange={handleContentChange}
+                onClick={(e) => (e.target.style.height = "auto")}
+                onFocus={(e) => (e.target.style.height = "auto")}
+                onBlur={(e) => (e.target.style.height = "inherit")}
+                placeholder="Enter your post content"
               ></textarea>
               <div className="selected-file">
-                  {selectedFile && (
-                    <div className='selected-file-header'>
-                      <b>Selected File: </b> {selectedFile.name} ({Math.round(selectedFile.size / 1024)} KB)
-                      
-                      <button className="selected-file-delete" onClick={() => setSelectedFile(null)}>Remove</button></div>
-
-                  )}
-                </div>
-                <div className='selected-file-update'> 
+                {selectedFile && (
+                  <div className="selected-file-header">
+                    <b>Selected File: </b> {selectedFile.name} (
+                    {Math.round(selectedFile.size / 1024)} KB)
+                    <button
+                      className="selected-file-delete"
+                      onClick={() => setSelectedFile(null)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="selected-file-update">
                 {/* Attachment Button */}
-            
-            <button onClick={(e) => {
-                e.preventDefault();
-                toggleFileUpload();
-            }}> Attachment</button>
-            </div>
 
-              <div className='post-detail'>
-            <button type="submit">Post</button></div>
-          </form>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleFileUpload();
+                  }}
+                >
+                  {" "}
+                  Attachment
+                </button>
+              </div>
+
+              <div className="post-detail">
+                <button type="submit">Post</button>
+              </div>
+            </form>
           </div>
           <ul>
             {posts.map((post) => (
-              <PostCard key={post._id} post={post} user={props.userdata} onDeletePost={handleDeletePost} />
+              <PostCard
+                key={post._id}
+                post={post}
+                user={props.userdata}
+                onDeletePost={handleDeletePost}
+              />
             ))}
           </ul>
         </div>
